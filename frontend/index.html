@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Clipping - Mini Opus AI</title>
+</head>
+<body>
+    <h2>Auto Clip Video dari YouTube</h2>
+
+    <input id="url" placeholder="Masukkan link YouTube">
+    <button onclick="process()">Generate Clips</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function process() {
+            const url = document.getElementById("url").value;
+            const form = new FormData();
+            form.append("url", url);
+
+            const res = await fetch("http://localhost:8000/clip", {
+                method: "POST",
+                body: form
+            });
+
+            const data = await res.json();
+            const box = document.getElementById("result");
+            box.innerHTML = "";
+
+            data.clips.forEach(c => {
+                box.innerHTML += `<p><a href="http://localhost:8000/${c}" download>Download Clip</a></p>`;
+            });
+        }
+    </script>
+</body>
+</html>

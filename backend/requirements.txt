@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+moviepy
+yt-dlp
+pydantic
+python-multipart
+openai
